@@ -3,9 +3,9 @@
     <div class="sign">
       <div class="header">宾馆住宿管理系统</div>
       <div class="main">
-        <el-input placeholder="username" v-model="account"></el-input>
-        <el-input type="password" placeholder="password" v-model="password"></el-input>
-        <el-button type="primary" @click="login">登录</el-button>
+        <el-input placeholder="username" v-model="uid"></el-input>
+        <el-input type="password" placeholder="password" v-model="pwd"></el-input>
+        <el-button type="primary" @click="login" :loading="loadingng">登录</el-button>
       </div>
     </div>
   </div>
@@ -16,17 +16,32 @@
     name: 'Login',
     data() {
       return {
-        account: '',
-        password: '',
-
+        uid: '',
+        pwd: '',
+        loadingng: false
       }
     },
     methods: {
-      login: function () {
-        this.$message.error({
-            message:'hello',
-            showClose:true,
-            center:true
+      login() {
+        if (!this.uid || !this.pwd) {
+          this.$message({
+            message: 'Username and Password should not be empty',
+            type: 'warning'
+          })
+          return
+        }
+        this.loadingng = true
+        this.$store.dispatch('login', {
+          uid: this.uid,
+          pwd: this.pwd
+        }).then(() => {
+          this.loadingng = false
+        }).catch((err) => {
+          this.loadingng = false
+          this.$message({
+            message: err.message,
+            type: 'error'
+          })
         })
       }
     }
