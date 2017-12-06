@@ -5,10 +5,10 @@ import modules from './modules'
 Vue.use(Vuex)
 
 const state = {
-
+  uid: ''
 }
 const getters = {
-
+  getUserId: (state) => state.uid
 }
 const mutations = {
 

@@ -35,7 +35,9 @@
           uid: this.uid,
           pwd: this.pwd
         }).then(() => {
+
           this.loadingng = false
+          this.$router.push('/home')
         }).catch((err) => {
           this.loadingng = false
           this.$message({

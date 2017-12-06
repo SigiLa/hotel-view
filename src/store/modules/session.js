@@ -12,8 +12,8 @@ const getters = {
 const actions = {
   login({commit}, payload) {
     return axios.post('/login', payload).then(({data}) => {
-      if (data.error) {
-        throw new Error(data.error)
+      if (data.status===0) {
+        throw new Error('用户名密码错误!')
       }
 
     })
