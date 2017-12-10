@@ -3,12 +3,13 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Home from '@/views/Home'
 import AddGuest from '@/components/AddGuest'
+import QueryGuest from '@/components/QueryGuest'
 Vue.use(Router)
 
 
 const routes = [{
     path: '/',
-    name: 'Login',
+    name: 'Default',
     component: Login
   },
   {
@@ -25,8 +26,12 @@ const routes = [{
         component: AddGuest
       },
       {
+        path: 'queryGuest',
+        component: QueryGuest
+      },
+      {
         path: '',
-        component: AddGuest
+        component: QueryGuest
       }
     ]
 

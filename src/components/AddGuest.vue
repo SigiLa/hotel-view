@@ -15,8 +15,8 @@
       </el-form-item>
       <el-form-item label="性别">
         <el-radio-group v-model="form.gender" style="margin-left:12px">
-          <el-radio :label="1">男</el-radio>
-          <el-radio :label="0">女</el-radio>
+          <el-radio label="1">男</el-radio>
+          <el-radio label="0">女</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item>
@@ -34,7 +34,7 @@
           name: '',
           idNumber: '',
           phone: '',
-          gender: 1
+          gender: '1'
         }
       }
     },
@@ -45,6 +45,27 @@
         // this.form.phone = ''
         // this.form.gender = 1
         this.$router.push('/home/addGuest')
+      },
+      onSave() {
+        this.$store.dispatch('addGuest', this.form).then(() => {
+          this.$message({
+            message: '保存成功!',
+            type: 'success'
+          })
+        }).catch((err) => {
+          this.$message({
+            message: err.message,
+            type: 'error'
+          })
+        })
+      }
+    },
+    watch: {
+      '$router' (to, form) {
+        // this.form.name = ''
+        // this.form.idNumber = ''
+        // this.form.phone = ''
+        // this.form.gender = 1
       }
     }
   }
