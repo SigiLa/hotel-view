@@ -5,6 +5,9 @@ const state = {
 const mutations = {
   updateGuestList(state, payload) {
     state.guestList = payload.guestList
+  },
+  deleteOneGuest(state, payload) {
+    state.guestList.splice(payload.index, 1)
   }
 }
 const getters = {
@@ -31,6 +34,27 @@ const actions = {
       commit('updateGuestList', {
         guestList: data
       })
+    })
+  },
+  deleteOneGuest({
+    commit
+  }, payload) {
+    return axios.get('/guest/deleteOne', {
+      params: {
+        id: payload.row.id
+      }
+    }).then(({
+      data
+    }) => {
+      if (data.status) {
+        commit('deleteOneGuest', {
+          index: payload.$index
+        })
+      }else{
+        throw new Error('删除失败!')
+      }
+    }).catch((err) => {
+      return Promise.reject(err.message)
     })
   }
 }

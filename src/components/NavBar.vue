@@ -43,7 +43,7 @@
             this.$router.push('/home/addGuest')
             return
           case '1-2':
-            this.$router.push('/home/queryGuest')
+            this.$router.replace('/home/queryGuest')
             return
         }
       }

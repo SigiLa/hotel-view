@@ -34,17 +34,17 @@
           name: '',
           idNumber: '',
           phone: '',
-          gender: '1'
+          gender: ''
         }
       }
     },
     methods: {
       onCancel() {
-        // this.form.name = ''
-        // this.form.idNumber = ''
-        // this.form.phone = ''
-        // this.form.gender = 1
-        this.$router.push('/home/addGuest')
+        this.form.name = ''
+        this.form.idNumber = ''
+        this.form.phone = ''
+        this.form.gender = ''
+
       },
       onSave() {
         this.$store.dispatch('addGuest', this.form).then(() => {
@@ -60,14 +60,7 @@
         })
       }
     },
-    watch: {
-      '$router' (to, form) {
-        // this.form.name = ''
-        // this.form.idNumber = ''
-        // this.form.phone = ''
-        // this.form.gender = 1
-      }
-    }
+
   }
 
 </script>
