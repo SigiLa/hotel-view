@@ -15,11 +15,12 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="mini">编辑</el-button>
+          <el-button @click="editGuest(scope)" size="mini">编辑</el-button>
           <el-button @click="deleteGuest(scope)" size="mini" type="danger">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
+    <edit-guest-dialog :index="currentIndex" @close="handleClose" :dialogVisiable="editDialogVisiable"></edit-guest-dialog>
   </div>
 
 
@@ -27,13 +28,18 @@
 </template>
 
 <script>
+  import EditGuestDialog from '@/components/EditGuest'
   import {
     mapGetters
   } from 'vuex'
   export default {
+    components: {
+      'EditGuestDialog': EditGuestDialog
+    },
     data() {
       return {
-
+        editDialogVisiable: false,
+        currentIndex: -1
       }
     },
     created() {
@@ -69,6 +75,14 @@
         }).catch(() => {
           return
         })
+      },
+      editGuest(scope) {
+        this.currentIndex = scope.$index
+        this.editDialogVisiable = true
+
+      },
+      handleClose() {
+        this.editDialogVisiable = false
       }
 
 

@@ -33,7 +33,12 @@
     name: 'NavBar',
     data() {
       return {
-
+        classObject: {
+          activeTextColor: '#ffd04b',
+          uniqueOpened: true,
+          backgroundColor: '#545c64',
+          textColor: '#fff'
+        }
       }
     },
     methods: {
@@ -49,15 +54,15 @@
       }
     },
     computed: {
-      classObject() {
-        return {
-          activeTextColor: '#ffd04b',
-          uniqueOpened: true,
-          backgroundColor: '#545c64',
-          textColor: '#fff'
-        }
+      // classObject() {
+      //   return {
+      //     activeTextColor: '#ffd04b',
+      //     uniqueOpened: true,
+      //     backgroundColor: '#545c64',
+      //     textColor: '#fff'
+      //   }
 
-      }
+      // }
     }
   }
 
