@@ -2,7 +2,8 @@
 <template>
   <el-dialog center width="40%" :visible.sync="dialogVisiable" :before-close="handleClose">
     <div class="edit-title" slot="title">
-      <i class="el-icon-edit"></i>用户资料</div>
+      <i class="fa fa-pencil-square-o">用户资料</i>
+    </div>
     <div class="edit-body">
       <el-form :model="form" label-width="80px" style="width:70%">
         <el-form-item label="姓名">
@@ -26,7 +27,7 @@
 
     <span slot="footer" class="dialog-footer">
       <el-button size="small" type="danger" @click="handleClose">取 消</el-button>
-      <el-button size="small" type="primary" @click="handleClose">保 存</el-button>
+      <el-button size="small" type="primary" @click="handleSave">保 存</el-button>
     </span>
   </el-dialog>
 </template>
@@ -57,10 +58,26 @@
       ...mapGetters(['guestList'])
     },
     methods: {
-
+      handleSave() {
+        this.$store.dispatch('alterGuest', {
+          index: this.index,
+          form: this.form
+        }).then(() => {
+          this.$message({
+            message: '修改成功',
+            type: 'success'
+          })
+        }).catch((err) => {
+          this.$message({
+            message: err,
+            type: 'error'
+          })
+        })
+        this.$emit('close')
+      },
       handleClose() {
         this.$emit('close')
-      }
+      },
     },
     watch: {
       index(newVal, oldVal) {

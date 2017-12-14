@@ -1,6 +1,6 @@
 <template>
   <div id="query-guest">
-    <el-table :data="realGuestList" stripe style="width: 80%">
+    <el-table :data="guestList" stripe style="width: 80%">
       <el-table-column type="index" width="60"></el-table-column>
       <el-table-column prop="name" label="姓名" width="180">
       </el-table-column>
@@ -8,10 +8,10 @@
       </el-table-column>
       <el-table-column prop="phone" label="手机号" width="180">
       </el-table-column>
-      <el-table-column prop="gender" label="性别" min-width="50">
-        <!-- <template slot-scope="scope">
-          {{scope.row.gender ? '男' : '女'}}
-        </template> -->
+      <el-table-column label="性别" min-width="50">
+        <template slot-scope="scope">
+          {{guestList[scope.$index].gender?'男':'女'}}
+        </template>
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
@@ -47,18 +47,18 @@
     },
     computed: {
       ...mapGetters(['guestList']),
-      realGuestList() {
-        return this.guestList.map((el) => {
-          const tmp = { ...el
-          }
-          if (tmp.gender) {
-            tmp.gender = '男'
-          } else {
-            tmp.gender = '女'
-          }
-          return tmp
-        })
-      }
+      // realGuestList() {
+      //   return this.guestList.map((el) => {
+      //     const tmp = { ...el
+      //     }
+      //     if (tmp.gender) {
+      //       tmp.gender = '男'
+      //     } else {
+      //       tmp.gender = '女'
+      //     }
+      //     return tmp
+      //   })
+      // }
     },
     methods: {
       deleteGuest(scope) {
@@ -70,7 +70,10 @@
           this.$store.dispatch('deleteOneGuest', scope).then(() => {
             this.$message('删除成功')
           }).catch((err) => {
-            this.$message(err)
+            this.$message({
+              message: err,
+              type: 'error'
+            })
           })
         }).catch(() => {
           return
@@ -84,9 +87,8 @@
       handleClose() {
         this.editDialogVisiable = false
       }
-
-
     },
+
   }
 
 </script>

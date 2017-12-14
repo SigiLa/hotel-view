@@ -8,6 +8,9 @@ const mutations = {
   },
   deleteOneGuest(state, payload) {
     state.guestList.splice(payload.index, 1)
+  },
+  updateGuest(state, payload) {
+    state.guestList.splice(payload.index, 1, payload.form)
   }
 }
 const getters = {
@@ -50,12 +53,28 @@ const actions = {
         commit('deleteOneGuest', {
           index: payload.$index
         })
-      }else{
+      } else {
         throw new Error('删除失败!')
       }
     }).catch((err) => {
       return Promise.reject(err.message)
     })
+  },
+  alterGuest({
+    commit
+  }, payload) {
+    axios.post('/guest/update', payload.form).then(({
+      data
+    }) => {
+      if (data.status) {
+        commit('updateGuest', payload)
+      } else {
+        throw new Error('更新用户资料失败!')
+      }
+    }).catch((err) => {
+      return Promise.reject(err.message)
+    })
+
   }
 }
 export default {
