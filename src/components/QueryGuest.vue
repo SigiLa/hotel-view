@@ -43,7 +43,12 @@
       }
     },
     created() {
-      this.$store.dispatch('queryGuest')
+      this.$store.dispatch('queryGuest').catch((err) => {
+        this.$message({
+          message: err.message,
+          type: 'error'
+        })
+      })
     },
     computed: {
       ...mapGetters(['guestList']),
@@ -68,7 +73,10 @@
           type: 'error'
         }).then(() => {
           this.$store.dispatch('deleteOneGuest', scope).then(() => {
-            this.$message('删除成功')
+            this.$message({
+              message: '删除成功',
+              type: 'success'
+            })
           }).catch((err) => {
             this.$message({
               message: err,

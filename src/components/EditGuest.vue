@@ -2,7 +2,7 @@
 <template>
   <el-dialog center width="40%" :visible.sync="dialogVisiable" :before-close="handleClose">
     <div class="edit-title" slot="title">
-      <i class="fa fa-pencil-square-o">用户资料</i>
+      <i class="fa fa-pencil-square-o">修改用户资料</i>
     </div>
     <div class="edit-body">
       <el-form :model="form" label-width="80px" style="width:70%">
@@ -78,11 +78,13 @@
       handleClose() {
         this.$emit('close')
       },
+
     },
     watch: {
-      index(newVal, oldVal) {
-        this.form = { ...this.guestList[newVal]
+      dialogVisiable() {
+        this.form = { ...this.guestList[this.index]
         }
+
       }
     }
   }

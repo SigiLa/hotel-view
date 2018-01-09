@@ -1,11 +1,13 @@
 <template>
   <div id="login">
-    <div class="sign">
-      <div class="header">宾馆住宿管理系统</div>
-      <div class="main">
-        <el-input placeholder="username" v-model="uid"></el-input>
-        <el-input type="password" placeholder="password" v-model="pwd"></el-input>
-        <el-button type="primary" @click="login" :loading="loadingng">登录</el-button>
+    <div class="shadow">
+      <div class="sign">
+        <div class="header">宾馆住宿管理系统</div>
+        <div class="main">
+          <el-input placeholder="username" v-model="uid"></el-input>
+          <el-input type="password" placeholder="password" v-model="pwd"></el-input>
+          <el-button type="primary" @click="login" :loading="loadingng">登录</el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -53,7 +55,14 @@
 <style>
   #login {
     height: 100%;
-    background-color: #324057;
+    background-image: url("../assets/background.png");
+    background-size: cover;
+  }
+
+  #login .shadow {
+    background-color: rgba(0, 0, 0, .7);
+    height: 100%;
+    width: 100%;
     display: flex;
   }
 

@@ -13,7 +13,6 @@
 
         <el-main class="main">
           <router-view></router-view>
-          <!-- <add-guest></add-guest> -->
         </el-main>
       </el-container>
 

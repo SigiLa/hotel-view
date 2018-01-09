@@ -63,7 +63,7 @@ const actions = {
   alterGuest({
     commit
   }, payload) {
-    axios.post('/guest/update', payload.form).then(({
+    return axios.post('/guest/update', payload.form).then(({
       data
     }) => {
       if (data.status) {
