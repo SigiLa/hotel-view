@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Home from '@/views/Home'
 import AddGuest from '@/components/AddGuest'
 import QueryGuest from '@/components/QueryGuest'
+import AccurateQueryGuest from '@/components/AccurateQueryGuest'
 Vue.use(Router)
 
 
@@ -32,6 +33,10 @@ const routes = [{
       {
         path: '',
         component: QueryGuest
+      },
+      {
+        path: 'accurateQueryGuest',
+        component: AccurateQueryGuest
       }
     ]
 

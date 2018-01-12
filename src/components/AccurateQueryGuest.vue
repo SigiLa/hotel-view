@@ -1,6 +1,6 @@
-// 添加客人
+// 条件查询客人信息
 <template>
-  <div id="add-guest">
+  <div id="accurate-query-guest">
     <div class="main">
       <el-form :model="form" label-width="80px" style="width:58%;">
         <el-form-item label="姓名">
@@ -22,13 +22,14 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSave">保存</el-button>
+          <el-button type="primary" @click="onQuery">查询</el-button>
           <el-button @click="onReset" style="margin-left:100px;">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
   </div>
 </template>
+
 <script>
   export default {
     data() {
@@ -42,32 +43,31 @@
       }
     },
     methods: {
-      onReset() {
-        this.form.name = ''
-        this.form.idNumber = ''
-        this.form.phone = ''
-        this.form.gender = ''
-      },
-      onSave() {
-        this.$store.dispatch('addGuest', this.form).then(() => {
-          this.$message({
-            message: '保存成功!',
-            type: 'success'
-          })
+      onQuery() {
+        this.$store.dispatch('accurateQueryGuest', this.form).then(() => {
+
         }).catch((err) => {
           this.$message({
             message: err.message,
             type: 'error'
           })
         })
-      }
-    },
+      },
 
+      onReset() {
+        this.form.name = ''
+        this.form.idNumber = ''
+        this.form.phone = ''
+        this.form.gender = ''
+      },
+
+    }
   }
 
 </script>
+
 <style scoped>
-  #add-guest {
+  #accurate-query-guest {
     padding: 0px 150px;
     height: 100%;
   }

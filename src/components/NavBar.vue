@@ -1,13 +1,7 @@
 <template>
   <div id="navbar">
-    <el-menu default-active="1-2" v-bind="classObject" @select="onSelect">
-      <el-submenu index="1">
-        <template slot="title">
-          客户信息管理
-        </template>
-        <el-menu-item index="1-1">添加客户</el-menu-item>
-        <el-menu-item index="1-2">查询</el-menu-item>
-      </el-submenu>
+    <el-menu default-active="1" v-bind="styleConf" @select="onSelect">
+      <el-menu-item index="1">客户信息管理</el-menu-item>
       <el-submenu index="2">
         <template slot="title">
           房间信息管理
@@ -33,9 +27,8 @@
     name: 'NavBar',
     data() {
       return {
-        classObject: {
+        styleConf: {
           activeTextColor: '#ffd04b',
-          uniqueOpened: true,
           backgroundColor: '#545c64',
           textColor: '#fff'
         }
@@ -44,11 +37,8 @@
     methods: {
       onSelect: function (index) {
         switch (index) {
-          case '1-1':
-            this.$router.push('/home/addGuest')
-            return
-          case '1-2':
-            this.$router.replace('/home/queryGuest')
+          case '1':
+            this.$router.push('/home')
             return
         }
       }

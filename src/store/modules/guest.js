@@ -16,6 +16,8 @@ const mutations = {
 const getters = {
   guestList: (state) => state.guestList
 }
+
+
 const actions = {
   addGuest({
     commit
@@ -75,6 +77,28 @@ const actions = {
       return Promise.reject(err.message)
     })
 
+  },
+  accurateQueryGuest({
+    commit
+  }, payload) {
+    let params = { ...payload
+    }
+    for (let i in params) {
+      if (params[i] == '') {
+        delete params[i]
+      }
+    }
+    return axios.get('/guest/accurateQuery', {
+      params
+    }).then(({
+      data
+    }) => {
+      if (data.status) {
+        commit('updateGuestList', data)
+      } else {
+        return Promise.reject()
+      }
+    })
   }
 }
 export default {
