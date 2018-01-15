@@ -28,6 +28,7 @@
       </el-form>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -45,7 +46,7 @@
     methods: {
       onQuery() {
         this.$store.dispatch('accurateQueryGuest', this.form).then(() => {
-
+          this.$router.push('/home/guest/queryResult')
         }).catch((err) => {
           this.$message({
             message: err.message,

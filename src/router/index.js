@@ -1,10 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
-import Home from '@/views/Home'
-import AddGuest from '@/components/AddGuest'
-import QueryGuest from '@/components/QueryGuest'
-import AccurateQueryGuest from '@/components/AccurateQueryGuest'
+
+import Login from '@/pages/Login'
+import Home from '@/pages/Home'
+
+import GuestManage from '@/views/GuestManage'
+import RoomManage from '@/views/RoomManage'
+
+import AddGuest from '@/components/guest/AddGuest'
+import QueryGuest from '@/components/guest/QueryGuest'
+import AccurateQueryGuest from '@/components/guest/AccurateQueryGuest'
+import QueryGuestResult from '@/components/guest/QueryGuestResult'
+
 Vue.use(Router)
 
 
@@ -23,24 +30,38 @@ const routes = [{
     name: 'Home',
     component: Home,
     children: [{
-        path: 'addGuest',
-        component: AddGuest
-      },
-      {
-        path: 'queryGuest',
-        component: QueryGuest
-      },
-      {
         path: '',
-        component: QueryGuest
+        redirect: 'guest'
       },
       {
-        path: 'accurateQueryGuest',
-        component: AccurateQueryGuest
+        path: 'guest',
+        component: GuestManage,
+        children: [{
+            path: '',
+            component: QueryGuest
+          }, {
+            path: 'addGuest',
+            component: AddGuest
+          },
+          {
+            path: 'queryGuest',
+            component: QueryGuest
+          },
+          {
+            path: 'accurateQueryGuest',
+            component: AccurateQueryGuest
+          },
+          {
+            path: 'queryResult',
+            component: QueryGuestResult
+          }
+        ]
+      },
+      {
+        path: 'room',
+        component: RoomManage
       }
     ]
-
-
   }
 ]
 

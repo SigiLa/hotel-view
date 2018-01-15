@@ -1,0 +1,144 @@
+<template>
+  <div class="direction-colum">
+
+    <div id="query-guest">
+      <el-table :data="guestList" :height="469.4" stripe style="width: 80%">
+        <el-table-column type="index" width="60"></el-table-column>
+        <el-table-column prop="name" label="姓名" width="180">
+        </el-table-column>
+        <el-table-column prop="idNumber" label="身份证号" width="250">
+        </el-table-column>
+        <el-table-column prop="phone" label="手机号" width="180">
+        </el-table-column>
+        <el-table-column label="性别" min-width="50">
+          <template slot-scope="scope">
+            {{guestList[scope.$index].gender?'男':'女'}}
+          </template>
+        </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button @click="editGuest(scope)" size="mini">编辑</el-button>
+            <el-button @click="deleteGuest(scope)" size="mini" type="danger">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <edit-guest-dialog :index="currentIndex" @close="handleClose" :dialogVisiable="editDialogVisiable"></edit-guest-dialog>
+    </div>
+    <el-pagination style="margin:auto;" layout="total,prev,pager,next,jumper" v-bind="paginationConf" @current-change="handleCurrentChange">
+    </el-pagination>
+  </div>
+
+</template>
+
+<script>
+  import axios from 'axios'
+  import EditGuestDialog from '@/components/guest/EditGuest'
+  import {
+    mapGetters
+  } from 'vuex'
+  axios.defaults.baseURL = 'http://127.0.0.1:8080/'
+  axios.defaults.withCredentials = true
+  export default {
+    components: {
+      'EditGuestDialog': EditGuestDialog
+    },
+    data() {
+      return {
+        editDialogVisiable: false,
+        currentIndex: -1,
+
+        paginationConf: {
+          pageSize: 8,
+          total: 0,
+          currentPage: 1,
+          pageCount: 0
+        },
+      }
+    },
+    created() {
+      axios.get('/guest/count').then(({
+        data
+      }) => {
+        this.paginationConf.total = data.count
+        this.paginationConf.pageCount = Math.ceil(data.count / 8)
+      })
+      this.$store.dispatch("queryGuestByPage",this.paginationConf)
+      // this.$store.dispatch('queryGuest').catch((err) => {
+      //   this.$message({
+      //     message: err.message,
+      //     type: 'error'
+      //   })
+      // })
+    },
+    computed: {
+      ...mapGetters(['guestList']),
+      // realGuestList() {
+      //   return this.guestList.map((el) => {
+      //     const tmp = { ...el
+      //     }
+      //     if (tmp.gender) {
+      //       tmp.gender = '男'
+      //     } else {
+      //       tmp.gender = '女'
+      //     }
+      //     return tmp
+      //   })
+      // }
+    },
+    methods: {
+      deleteGuest(scope) {
+        this.$confirm('将删除客人信息，是否继续？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'error'
+        }).then(() => {
+          this.$store.dispatch('deleteOneGuest', scope).then(() => {
+            this.$message({
+              message: '删除成功',
+              type: 'success'
+            })
+          }).catch((err) => {
+            this.$message({
+              message: err,
+              type: 'error'
+            })
+          })
+        }).catch(() => {
+          return
+        })
+      },
+      editGuest(scope) {
+        this.currentIndex = scope.$index
+        this.editDialogVisiable = true
+
+      },
+      handleClose() {
+        this.editDialogVisiable = false
+      },
+      handleCurrentChange(currentPage) {
+        this.paginationConf.currentPage=currentPage
+        this.$store.dispatch("queryGuestByPage",this.paginationConf)
+      }
+    },
+
+  }
+
+</script>
+// scoped 指定该样式仅对当前组件有效
+<style scoped>
+  .direction-colum {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #query-guest {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .el-table {
+    flex: 0 0 auto;
+  }
+
+</style>

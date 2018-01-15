@@ -1,6 +1,6 @@
 <template>
   <div id="query-guest">
-    <el-table :data="guestList" stripe style="width: 80%">
+    <el-table :data="guestList" :height="469.4" stripe style="width: 80%">
       <el-table-column type="index" width="60"></el-table-column>
       <el-table-column prop="name" label="姓名" width="180">
       </el-table-column>
@@ -22,13 +22,10 @@
     </el-table>
     <edit-guest-dialog :index="currentIndex" @close="handleClose" :dialogVisiable="editDialogVisiable"></edit-guest-dialog>
   </div>
-
-
-
 </template>
 
 <script>
-  import EditGuestDialog from '@/components/EditGuest'
+  import EditGuestDialog from '@/components/guest/EditGuest'
   import {
     mapGetters
   } from 'vuex'
@@ -41,14 +38,6 @@
         editDialogVisiable: false,
         currentIndex: -1
       }
-    },
-    created() {
-      this.$store.dispatch('queryGuest').catch((err) => {
-        this.$message({
-          message: err.message,
-          type: 'error'
-        })
-      })
     },
     computed: {
       ...mapGetters(['guestList']),

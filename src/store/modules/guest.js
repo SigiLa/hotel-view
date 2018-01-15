@@ -33,7 +33,7 @@ const actions = {
   queryGuest({
     commit
   }, payload) {
-    return axios.get('/guest/query').then(({
+    return axios.get('/guest/queryAll').then(({
       data
     }) => {
       commit('updateGuestList', {
@@ -44,7 +44,7 @@ const actions = {
   deleteOneGuest({
     commit
   }, payload) {
-    return axios.get('/guest/deleteOne', {
+    return axios.get('/guest/delete', {
       params: {
         id: payload.row.id
       }
@@ -90,6 +90,21 @@ const actions = {
     }
     return axios.get('/guest/accurateQuery', {
       params
+    }).then(({
+      data
+    }) => {
+      if (data.status) {
+        commit('updateGuestList', data)
+      } else {
+        return Promise.reject()
+      }
+    })
+  },
+  queryGuestByPage({
+    commit
+  }, payload) {
+    return axios.get('/guest/queryByPage', {
+      params: payload
     }).then(({
       data
     }) => {

@@ -2,7 +2,7 @@
   <div id="breadcrumb">
     <el-menu default-active="1" v-bind="styleConf" @select="onSelect">
       <el-menu-item index="1">
-        <i class="fa fa-address-book" aria-hidden="true">&nbsp;客户资料</i>
+        <i class="fa fa-address-book" aria-hidden="true">&nbsp;全部客户资料</i>
       </el-menu-item>
       <el-menu-item index="2">
         <i class="fa fa-search fa-1x" aria-hidden="true">&nbsp;查询</i>
@@ -23,7 +23,7 @@
       return {
         styleConf: {
           mode: 'horizontal',
-          activeTextColor:'#FF3366'
+          activeTextColor: '#FF3366'
         }
       }
     },
@@ -31,13 +31,13 @@
       onSelect: function (index) {
         switch (index) {
           case '1':
-            this.$router.push('/home/queryGuest')
+            this.$router.push('/home/guest/queryGuest')
             return
           case '2':
-            this.$router.push('/home/accurateQueryGuest')
+            this.$router.push('/home/guest/accurateQueryGuest')
             return
           case '3':
-            this.$router.push('/home/addGuest')
+            this.$router.push('/home/guest/addGuest')
             return
         }
       }

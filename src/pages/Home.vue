@@ -9,11 +9,7 @@
           <nav-bar></nav-bar>
         </el-aside>
 
-
-
         <el-main class="main">
-          <breadcrumb></breadcrumb>
-
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -27,14 +23,11 @@
 <script>
   import NavBar from '@/components/NavBar'
   import MyHead from '@/components/Head'
-  import AddGuest from '@/components/AddGuest'
-  import Breadcrumb from '@/components/Breadcrumb'
+
   export default {
     components: {
       'nav-bar': NavBar,
       'my-head': MyHead,
-      'add-guest': AddGuest,
-      'breadcrumb': Breadcrumb
     }
   }
 
@@ -53,7 +46,6 @@
   .main {
     padding: 0;
     height: 100%;
-    overflow: hidden;
   }
 
 </style>

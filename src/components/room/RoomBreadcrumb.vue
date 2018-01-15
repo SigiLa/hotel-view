@@ -1,29 +1,27 @@
 <template>
-  <div id="navbar">
+  <div id="breadcrumb">
     <el-menu default-active="1" v-bind="styleConf" @select="onSelect">
       <el-menu-item index="1">
-        <i class="fa fa-user-o" aria-hidden="true"> 客户信息管理</i>
+        <i class="fa fa-address-book" aria-hidden="true">&nbsp;空闲客房</i>
       </el-menu-item>
       <el-menu-item index="2">
-        <i class="fa fa-hotel" aria-hidden="true">  客房管理</i>
+        <i class="fa fa-search fa-1x" aria-hidden="true">&nbsp;入住信息</i>
       </el-menu-item>
       <el-menu-item index="3">
-        <i class="fa fa-history" aria-hidden="true"> 历史记录</i>
+        <i class="fa fa-search fa-1x" aria-hidden="true">&nbsp;退房</i>
       </el-menu-item>
     </el-menu>
 
   </div>
-
 </template>
+
 <script>
   export default {
-    name: 'NavBar',
     data() {
       return {
         styleConf: {
-          activeTextColor: '#ffd04b',
-          backgroundColor: '#545c64',
-          textColor: '#fff'
+          mode: 'horizontal',
+          activeTextColor: '#00CCCC'
         }
       }
     },
@@ -31,18 +29,24 @@
       onSelect: function (index) {
         switch (index) {
           case '1':
-            this.$router.push('/home/guest')
+            this.$router.push('/home/room')
             return
           case '2':
             this.$router.push('/home/room')
             return
+          case '3':
+            this.$router.push('/home/room')
+            return
         }
       }
-    },
+    }
   }
 
 </script>
-<style>
 
+<style>
+  #breadcrumb {
+    padding: 20px 150px 10px;
+  }
 
 </style>
