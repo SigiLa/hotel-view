@@ -1,24 +1,24 @@
 <template>
   <div id="room-status">
-    <el-table :data="roomList" v-bind="tableConf" style="width: 80%">
+    <el-table :data="recordList" v-bind="tableConf" style="width: 80%">
       <el-table-column type="expand">
         <template slot-scope="props">
-          <el-form label-position="left" inline class="demo-table-expand">
-            <el-form-item label="商品名称">
-              <span>{{ props.row.name }}</span>
+          <!-- <el-form label-position="left" inline class="demo-table-expand">
+            <el-form-item label="客人 1 ID">
+              <span>{{ props.row.guests[1].name }}</span>
             </el-form-item>
             <el-form-item label="所属店铺">
               <span>{{ props.row.shop }}</span>
             </el-form-item>
-          </el-form>
+          </el-form> -->
         </template>
       </el-table-column>
-      <el-table-column prop="roomId" label="房间号">
+      <el-table-column prop="rawRecord.roomId" label="房间号">
       </el-table-column>
-      <el-table-column label="床型" prop="type" :filters="[{ text: '标准间', value: 0 }, { text: '大床房', value: 1 }]" :filter-method="filterType">
+      <el-table-column label="床型" prop="rawRecord.type" :filters="[{ text: '标准间', value: 0 }, { text: '大床房', value: 1 }]" :filter-method="filterType">
         <template slot-scope="scope">
-          <el-tag :disable-transitions="true" :type="scope.row.type === 1 ? 'primary' : 'success'">
-            {{scope.row.type?'大床房':'标准间'}}
+          <el-tag :disable-transitions="true" :type="scope.row.rawRecord.type === 1 ? 'primary' : 'success'">
+            {{scope.row.rawRecord.type?'大床房':'标准间'}}
           </el-tag>
         </template>
       </el-table-column>
@@ -60,26 +60,50 @@
       }
     },
     created() {
+      this.$store.dispatch('queryRoomStatus').catch((err) => {
+        this.$message({
+          message: '发生未知错误',
+          type: 'error'
+        })
+      })
 
     },
     computed: {
-      ...mapGetters(['roomList']),
-
+      ...mapGetters(['recordList']),
     },
     methods: {
-
-      editGuest(scope) {
-        this.currentIndex = scope.$index
-        this.editDialogVisiable = true
-      },
       vacateRoom(scope) {
-
+        axios.get('/room/vacate', {
+          params: {
+            roomId: scope.row.rawRecord.roomId
+          }
+        }).then(({
+          data
+        }) => {
+          if (data.status) {
+            this.$message({
+              message: '退房成功',
+              type: 'success'
+            })
+            this.$store.dispatch('queryRoomStatus').catch((err) => {
+              this.$message({
+                message: '发生未知错误',
+                type: 'error'
+              })
+            })
+          } else {
+            this.$message({
+              message: '退房失败',
+              type: 'error'
+            })
+          }
+        })
       },
       filterType(value, row) {
-        return row.type === value
+        return row.rawRecord.type === value
       },
       filterState(value, row) {
-        return row.status === value
+        return row.state === value
       },
     },
 

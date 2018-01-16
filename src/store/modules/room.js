@@ -1,16 +1,21 @@
 import axios from 'axios'
 
 const state = {
-  roomList: []
+  roomList: [],
+  recordList: []
 }
 
 const getters = {
-  roomList: (state) => state.roomList
+  roomList: (state) => state.roomList,
+  recordList: (state) => state.recordList
 }
 
 const mutations = {
   updateRoomList(state, payload) {
     state.roomList = payload.roomList
+  },
+  updateRecordList(state, payload) {
+    state.recordList = payload.recordList
   }
 }
 const actions = {
@@ -22,6 +27,19 @@ const actions = {
     }) => {
       if (data.status) {
         commit('updateRoomList', data)
+      } else {
+        return Promise.reject()
+      }
+    })
+  },
+  queryRoomStatus({
+    commit
+  }, payload) {
+    return axios.get('/room/queryStatus').then(({
+      data
+    }) => {
+      if (data.status) {
+        commit('updateRecordList', data)
       } else {
         return Promise.reject()
       }
