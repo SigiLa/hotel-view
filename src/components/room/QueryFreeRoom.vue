@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div id="query-free-room">
       <el-table :data="roomList" v-bind="tableConf" style="width: 80%">
         <el-table-column type="index" width="150"></el-table-column>
@@ -40,7 +39,7 @@
             </el-tag>
           </el-form-item>
           <el-form-item label="开房日期">
-            <el-date-picker v-model="form.getRoomDate" type="date" placeholder="选择日期">
+            <el-date-picker value-format="yyyy-MM-dd" v-model="form.getRoomDate" type="date" placeholder="选择日期">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="天数">
@@ -74,7 +73,6 @@
   axios.defaults.baseURL = 'http://127.0.0.1:8080/'
   axios.defaults.withCredentials = true
   export default {
-    components: {},
     data() {
       return {
         getRoomDialogVisiable: false,
@@ -128,8 +126,24 @@
         this.getRoomDialogVisiable = false
       },
       handleDialogSubmit() {
-        
-        this.init()
+        axios.post('/room/getRoom', this.form).then(({
+          data
+        }) => {
+          if (data.status) {
+            this.$message({
+              message: '开房成功',
+              type: 'success'
+            })
+            this.init()
+            this.getRoomDialogVisiable = false
+            this.$store.dispatch('queryFreeRoom')
+          } else {
+            this.$message({
+              message: '开房失败',
+              type: 'error'
+            })
+          }
+        })
       },
 
       filterType(value, row) {
