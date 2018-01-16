@@ -13,26 +13,26 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column prop="roomId" label="房号">
+      <el-table-column prop="roomId" label="房间号">
       </el-table-column>
-      <el-table-column label="床型" :filters="[{ text: '标准间', value: 0 }, { text: '大床房', value: 1 }]" :filter-method="filterType">
+      <el-table-column label="床型" prop="type" :filters="[{ text: '标准间', value: 0 }, { text: '大床房', value: 1 }]" :filter-method="filterType">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.type === 1 ? 'primary' : 'success'">
+          <el-tag :disable-transitions="true" :type="scope.row.type === 1 ? 'primary' : 'success'">
             {{scope.row.type?'大床房':'标准间'}}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="状态" :filters="[{text:'即将到期',value:1},{text:'正常',value:0}]" :filter-method="filterStatus">
+      <el-table-column label="状态" prop="state" :filters="[{text:'即将到期',value:1},{text:'正常',value:0}]" :filter-method="filterState">
         <template slot-scope="scope">
-          <i :style="{color:scope.row.status?'#E6A23C':'#67C23A'}" class="fa fa-circle" aria-hidden="true">
-            {{scope.row.status?'即将到期':'正常'}}
+          <i :style="{color:scope.row.state?'#E6A23C':'#67C23A'}" class="fa fa-circle" aria-hidden="true">
+            {{scope.row.state?'即将到期':'正常'}}
           </i>
         </template>
       </el-table-column>
 
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="editGuest(scope)" type="danger" size="mini">退房</el-button>
+          <el-button @click="vacateRoom(scope)" type="danger" size="mini">退房</el-button>
         </template>
       </el-table-column>
 
@@ -43,16 +43,12 @@
 
 <script>
   import axios from 'axios'
-  import EditGuestDialog from '@/components/guest/EditGuest'
   import {
     mapGetters
   } from 'vuex'
   axios.defaults.baseURL = 'http://127.0.0.1:8080/'
   axios.defaults.withCredentials = true
   export default {
-    components: {
-      'EditGuestDialog': EditGuestDialog
-    },
     data() {
       return {
         editDialogVisiable: false,
@@ -64,7 +60,7 @@
       }
     },
     created() {
-      this.$store.dispatch('queryFreeRoom')
+
     },
     computed: {
       ...mapGetters(['roomList']),
@@ -75,13 +71,15 @@
       editGuest(scope) {
         this.currentIndex = scope.$index
         this.editDialogVisiable = true
+      },
+      vacateRoom(scope) {
 
       },
-      filterStatus(value, row) {
-        return row.status === value
+      filterType(value, row) {
+        return row.type === value
       },
-      handleClose() {
-        this.editDialogVisiable = false
+      filterState(value, row) {
+        return row.status === value
       },
     },
 

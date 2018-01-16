@@ -1,13 +1,14 @@
 import axios from 'axios'
 
 const state = {
-  recordList = [],
-  historyRecordList=[]
+  recordList: [],
+  historyRecordList: []
 }
 
 const getters = {
-
+  recordList: (state) => state.recordList
 }
+
 const mutations = {
 
 }

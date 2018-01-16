@@ -2,6 +2,11 @@ import axios from 'axios'
 const state = {
   guestList: []
 }
+
+const getters = {
+  guestList: (state) => state.guestList
+}
+
 const mutations = {
   updateGuestList(state, payload) {
     state.guestList = payload.guestList
@@ -13,10 +18,6 @@ const mutations = {
     state.guestList.splice(payload.index, 1, payload.form)
   }
 }
-const getters = {
-  guestList: (state) => state.guestList
-}
-
 
 const actions = {
   addGuest({
