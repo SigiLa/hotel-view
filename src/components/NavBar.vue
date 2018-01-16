@@ -2,13 +2,13 @@
   <div id="navbar">
     <el-menu default-active="1" v-bind="styleConf" @select="onSelect">
       <el-menu-item index="1">
-        <i class="fa fa-user-o" aria-hidden="true"> 客户信息管理</i>
+        <i class="fa fa-user-o fa-fw" aria-hidden="true"> 客户信息管理</i>
       </el-menu-item>
       <el-menu-item index="2">
-        <i class="fa fa-hotel" aria-hidden="true">  客房管理</i>
+        <i class="fa fa-hotel fa-fw" aria-hidden="true"> 客房管理</i>
       </el-menu-item>
       <el-menu-item index="3">
-        <i class="fa fa-history" aria-hidden="true"> 历史记录</i>
+        <i class="fa fa-history fa-fw" aria-hidden="true"> 历史记录</i>
       </el-menu-item>
     </el-menu>
 

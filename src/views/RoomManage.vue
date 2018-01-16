@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import RoomBreadcrumb from '@/components/RoomBreadcrumb'
+  import RoomBreadcrumb from '@/components/room/RoomBreadcrumb'
   export default {
     components: {
       'room-breadcrumb': RoomBreadcrumb
@@ -16,7 +16,7 @@
 </script>
 
 <style>
-  #guest-manage {
+  #room-manage {
     height: 100%;
     overflow: hidden;
   }

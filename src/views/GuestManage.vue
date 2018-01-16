@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import GuestBreadcrumb from '@/components/GuestBreadcrumb'
+  import GuestBreadcrumb from '@/components/guest/GuestBreadcrumb'
   export default {
     components: {
       'guest-breadcrumb': GuestBreadcrumb
