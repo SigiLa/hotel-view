@@ -36,6 +36,9 @@
           case '2':
             this.$router.push('/home/room')
             return
+          case '3':
+            this.$router.push('/home/history')
+            return
         }
       }
     },

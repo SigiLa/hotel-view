@@ -6,6 +6,7 @@ import Home from '@/pages/Home'
 
 import GuestManage from '@/views/GuestManage'
 import RoomManage from '@/views/RoomManage'
+import HistoryManage from '@/views/HistoryManage'
 
 import AddGuest from '@/components/guest/AddGuest'
 import QueryGuest from '@/components/guest/QueryGuest'
@@ -16,6 +17,10 @@ import QueryFreeRoom from '@/components/room/QueryFreeRoom'
 import RoomStatus from '@/components/room/RoomStatus'
 import AccurateQueryRoom from '@/components/room/AccurateQueryRoom'
 import QueryRoomResult from '@/components/room/QueryRoomResult'
+
+import AccurateQueryRecord from '@/components/history/AccurateQueryRecord'
+import QueryRecordResult from '@/components/history/QueryRecordResult'
+import QueryAllRecord from '@/components/history/QueryAllRecord'
 
 Vue.use(Router)
 
@@ -84,6 +89,27 @@ const routes = [{
           {
             path: 'queryResult',
             component: QueryRoomResult
+          }
+        ]
+      },
+      {
+        path: 'history',
+        component: HistoryManage,
+        children: [{
+            path: '',
+            redirect: 'queryAll'
+          },
+          {
+            path: 'queryAll',
+            component: QueryAllRecord
+          },
+          {
+            path: 'accurateQuery',
+            component: AccurateQueryRecord
+          },
+          {
+            path: 'queryResult',
+            component: QueryRecordResult
           }
         ]
       }

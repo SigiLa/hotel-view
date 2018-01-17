@@ -2,8 +2,8 @@
   <div id="head">
     <div class="title">宾馆住宿管理系统</div>
     <div class="head-right">
-      <div id="userInfo">欢迎您，{{getUserId}}</div>
-      <a href="javascript:"  id="signOut" @click="signOut">退出</a>
+      <div id="userInfo">欢迎您，{{uid}}</div>
+      <a href="javascript:" id="signOut" @click="signOut">退出</a>
     </div>
 
   </div>
@@ -20,9 +20,7 @@
       }
     },
     computed: {
-      ...mapGetters({
-        getUserId: 'getUserId'
-      })
+      ...mapGetters(['uid'])
     }
 
   }

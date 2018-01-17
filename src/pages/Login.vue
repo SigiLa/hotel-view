@@ -37,13 +37,12 @@
           uid: this.uid,
           pwd: this.pwd
         }).then(() => {
-
           this.loadingng = false
           this.$router.push('/home')
         }).catch((err) => {
           this.loadingng = false
           this.$message({
-            message: err.message,
+            message: '登录失败',
             type: 'error'
           })
         })

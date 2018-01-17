@@ -44,7 +44,7 @@
 
 </script>
 
-<style>
+<style scoped>
   #breadcrumb {
     padding: 20px 150px 10px;
   }
