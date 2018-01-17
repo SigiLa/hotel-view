@@ -3,7 +3,7 @@
     <div class="main">
       <el-form :model="form" label-width="80px" style="width:58%;">
         <el-form-item label="房间号">
-          <el-input v-model="form.name">
+          <el-input v-model="form.roomId">
           </el-input>
         </el-form-item>
         <el-form-item label="身份证号">
@@ -40,11 +40,11 @@
     },
     methods: {
       onQuery() {
-        this.$store.dispatch('accurateQueryGuest', this.form).then(() => {
+        this.$store.dispatch('accurateQueryRoom', this.form).then(() => {
           this.$router.push('/home/room/queryResult')
         }).catch((err) => {
           this.$message({
-            message: err.message,
+            message: '发生未知错误',
             type: 'error'
           })
         })
@@ -53,7 +53,7 @@
       onReset() {
         this.form.roomId = ''
         this.form.idNumber = ''
-        this.form.phone = ''
+        this.form.type = ''
       },
 
     }

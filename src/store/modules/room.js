@@ -44,6 +44,28 @@ const actions = {
         return Promise.reject()
       }
     })
+  },
+  accurateQueryRoom({
+    commit
+  }, payload) {
+    let params = { ...payload
+    }
+    for (let i in params) {
+      if (params[i] == '') {
+        delete params[i]
+      }
+    }
+    return axios.get('/room/accurateQuery', {
+      params
+    }).then(({
+      data
+    }) => {
+      if (data.status) {
+        commit('updateRecordList', data)
+      } else {
+        return Promise.reject()
+      }
+    })
   }
 }
 

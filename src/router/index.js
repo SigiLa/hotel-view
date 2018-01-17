@@ -15,6 +15,7 @@ import QueryGuestResult from '@/components/guest/QueryGuestResult'
 import QueryFreeRoom from '@/components/room/QueryFreeRoom'
 import RoomStatus from '@/components/room/RoomStatus'
 import AccurateQueryRoom from '@/components/room/AccurateQueryRoom'
+import QueryRoomResult from '@/components/room/QueryRoomResult'
 
 Vue.use(Router)
 
@@ -79,6 +80,10 @@ const routes = [{
           {
             path: 'accurateQuery',
             component: AccurateQueryRoom
+          },
+          {
+            path: 'queryResult',
+            component: QueryRoomResult
           }
         ]
       }

@@ -10,6 +10,12 @@ import 'font-awesome/css/font-awesome.min.css'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
+Date.prototype.Format = function () {
+  const date = this.getFullYear() + '-' + (this.getMonth() + 1) + '-' + (this.getDay() + 14)
+  return date
+}
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
