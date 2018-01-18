@@ -4,8 +4,8 @@
       <div class="sign">
         <div class="header">宾馆住宿管理系统</div>
         <div class="main">
-          <el-input placeholder="username" v-model="uid"></el-input>
-          <el-input type="password" placeholder="password" v-model="pwd"></el-input>
+          <el-input placeholder="用户名" v-model="uid"></el-input>
+          <el-input type="password" placeholder="密码" v-model="pwd"></el-input>
           <el-button type="primary" @click="login" :loading="loadingng">登录</el-button>
         </div>
       </div>
@@ -27,7 +27,7 @@
       login() {
         if (!this.uid || !this.pwd) {
           this.$message({
-            message: 'Username and Password should not be empty',
+            message: '用户名和密码不能为空',
             type: 'warning'
           })
           return
